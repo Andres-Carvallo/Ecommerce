@@ -44,21 +44,21 @@ Por otro lado los cupones al ser objetos si estan presentes aplican cambios al t
 Modelos 
 
 Coupon
-
+`
 class Coupon < ApplicationRecord
     belongs_to :user
     has_many :orders
 end
 
 User Coupons
-
+`
 class UserCoupon < ApplicationRecord
     belongs_to :user
     has_many :orders
 end
 
 User
-
+`
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
@@ -70,7 +70,7 @@ end
 Para poder aplicar estos cupones se pueden implementar botones para agregarlos y modificar el monto total en el carro de compra (estos se haria en el controlador del carro de compra ya que ahí podemos relacionar los cupones que tiene el usuario que esta comprando)
 
 Acciones
-
+  `
   def add_discount_coupons 
     current_user_coupons = current_user.coupons   
     if current_user_coupons.present?
@@ -82,7 +82,7 @@ Acciones
       end
     end
   end
-
+  `
   def add_discount_user_coupon
     user_coupon = current_user.user_coupon  
     current_order.update(coupon_id: user_coupon.id)
@@ -91,7 +91,7 @@ Acciones
     user_coupon.update(user_id: nil)
     
   end
-
+  `
   def add_mount_discount_coupons 
     current_user_coupons = current_user.coupons
     if current_user_coupons.present?
@@ -107,7 +107,7 @@ Acciones
       end
     end
   end
-
+  `
   def add_discount_user_coupon
     user_coupon = current_user.user_coupon  
     current_order.update(coupon_id: user_coupon.id)
