@@ -55,7 +55,7 @@ class Coupon < ApplicationRecord
 end
 
 User Coupons
-`
+
 class UserCoupon < ApplicationRecord
 
     belongs_to :user
@@ -120,7 +120,7 @@ Acciones
     end
 
   end
-  `
+  
   def add_discount_user_coupon
 
     user_coupon = current_user.user_coupon  
@@ -130,7 +130,7 @@ Acciones
     user_coupon.update(user_id: nil)
 
   end
-  `
+  
 
 Al aplicar los botones con estas acciones al final de cada una se cambia el user_id de los cupones a nil por lo que al perderse la relacion con el usuario el usuario no puede volver a usarlos y queda en el registro de la orden que cupon su uso, así no perdemos informacion.
 
