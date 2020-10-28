@@ -10,5 +10,14 @@ class ApplicationController < ActionController::Base
     end
 
     nil
+
+    def discount_percentages
+      discount_percentages = []
+      current_user.coupons.each do |coupon|
+        discount_percentages << coupon.discount
+      end   
+      discount_percentages
+      byebug
+    end
   end
 end

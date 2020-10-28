@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  discount: 1
+  unique: false
+  mount_discount: 1
+
+two:
+  name: MyString
+  discount: 1
+  unique: false
+  mount_discount: 1

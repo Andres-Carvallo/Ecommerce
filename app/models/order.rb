@@ -3,9 +3,11 @@ class Order < ApplicationRecord
 
   belongs_to :user
 
-  has_many :order_items
+  has_many :order_items, dependent: :destroy
   has_many :products, through: :order_items
   has_many :payments
+  has_many :coupons, dependent: :destroy
+
 
   validates :number, uniqueness: true
 
@@ -28,6 +30,8 @@ class Order < ApplicationRecord
     9
   end
 
+
+
   def add_product(product_id, quantity)
     product = Product.find(product_id)
     if product && (product.stock > 0)
@@ -39,7 +43,7 @@ class Order < ApplicationRecord
   def compute_total
     sum = 0
     order_items.each do |item|
-      sum += item.price
+        sum += item.price
     end
     update_attribute(:total, sum)
   end

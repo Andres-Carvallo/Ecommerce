@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :user_coupons
+  resources :coupons
   resources :base_products
   devise_for :users
   devise_for :admins
