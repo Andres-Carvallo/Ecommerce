@@ -10,13 +10,13 @@
     Para poder plasmar esto en la vista debeos crear 2 metodos 
         - El primero se encarga de retornar todos los productos hijos de Base Product
         ej:
-        `     
+            
         def children
             children = self.products
         end
 
         - El segundo se encarga de retornar el stock total de los productos hijos de Base product
-        `
+      
         def children_stock
             self.products.sum(:stock) 
         end
@@ -44,7 +44,7 @@ Por otro lado los cupones al ser objetos si estan presentes aplican cambios al t
 Modelos 
 
 Coupon
-`
+
 class Coupon < ApplicationRecord
     belongs_to :user
     has_many :orders
@@ -58,7 +58,7 @@ class UserCoupon < ApplicationRecord
 end
 
 User
-`
+
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
@@ -70,7 +70,7 @@ end
 Para poder aplicar estos cupones se pueden implementar botones para agregarlos y modificar el monto total en el carro de compra (estos se haria en el controlador del carro de compra ya que ahí podemos relacionar los cupones que tiene el usuario que esta comprando)
 
 Acciones
-  `
+  
   def add_discount_coupons 
     current_user_coupons = current_user.coupons   
     if current_user_coupons.present?
@@ -82,7 +82,7 @@ Acciones
       end
     end
   end
-  `
+  
   def add_discount_user_coupon
     user_coupon = current_user.user_coupon  
     current_order.update(coupon_id: user_coupon.id)
@@ -91,7 +91,7 @@ Acciones
     user_coupon.update(user_id: nil)
     
   end
-  `
+  
   def add_mount_discount_coupons 
     current_user_coupons = current_user.coupons
     if current_user_coupons.present?
@@ -115,7 +115,7 @@ Acciones
     @order = current_order
     user_coupon.update(user_id: nil)
   end
-
+  `
 
 Al aplicar los botones con estas acciones al final de cada una se cambia el user_id de los cupones a nil por lo que al perderse la relacion con el usuario el usuario no puede volver a usarlos y queda en el registro de la orden que cupon su uso, así no perdemos informacion.
 
