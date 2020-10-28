@@ -1,24 +1,26 @@
 # README
+1) En carpeta raiz se encuentre el diagrama con todos los cambios aplicados 
 
 6) Implementaion de lista de productos del catálogo:
 
-    - En primer lugar la vista home debe solamente productos unicos(los cuales se encuentran en la tabla Base Products). 
+    - En primer lugar la vista home debe solamente productos unicos(los cuales se encuentran en la tabla Base Products) 
     - En segundo lugar la vista home debe mostrar solamente productos unicos que tengan stock en alguna de sus variaciones.
     -   Las varaiciones se encuentran en la tabla product la cual es hija de BaseProduct
     
     Para poder plasmar esto en la vista debeos crear 2 metodos 
         - El primero se encarga de retornar todos los productos hijos de Base Product
-        ej:     
+        ej:
+        `     
         def children
             children = self.products
         end
 
         - El segundo se encarga de retornar el stock total de los productos hijos de Base product
-
+        `
         def children_stock
             self.products.sum(:stock) 
         end
-
+    `
     Baseproducts.all.each do |baseproduct|
         if baseproduct.children_stock != 0
             baseproduct.children.first
@@ -29,7 +31,11 @@
 
     Por ultimo en la vista show debemos mostrar todas las caracteristicas de cada producto con un formulario seleccionable ypara poder agregar el produto seleccionado con las caracteristias especificas debemos agregar el botton add to cart en la misma vista pensando en ingresar nuestro producto unitario al carro de compras.
 
-8) En primer lugar en la carpeta raiz de rails se encuentra con el nombre de erd un ejemplo de nuestros modelos y sus nuevas relaciones.
+7) Creo que con las nuevas reglas de negocio no es necesario modificar order_item ya que entrega los atributos que se muestran en el carro solamente. Los productos tienen dentro su modelo los atributos especificos por lo que con las primeras modificaciones no deberiamos tener problema ya que solo se agrego un baseproduct que seria como super categoria de los productos especificos. 
+
+Por otro lado los cupones al ser objetos si estan presentes aplican cambios al total de la orden no a productos especificos del order item. Por lo anterior si estos cupones se aplican sobre el total de la orden no es necesario modificar OrderItem.
+
+8) En primer lugar en la carpeta raiz de rails se encuentra con el nombre de diagrama_ecom un ejemplo de nuestros modelos y sus nuevas relaciones.
 
 - Para poder crear los cupones se crean dos modelos Coupons y User Coupons 
     -Coupons al ser de distribucion masiva tiene mucho usuarios y puede ser aplicado a muchas ordenes tambien
